@@ -1,2 +1,2 @@
 # kafkaScala
-Kafka scala using docker
+Kafka scala using docker compose
