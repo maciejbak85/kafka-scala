@@ -1,0 +1,34 @@
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <!--<pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} [%highlight(%-5level)] %cyan(%logger{5}): %msg %n</pattern>-->
+            <!--<pattern>%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n%rEx</pattern>-->
+            <!--<pattern>[%highlight(%-5level)] %cyan(%logger{5}): %msg %n</pattern>-->
+            <!--<pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} [%thread] [%highlight(%-5level)] %cyan(%logger{5}): %msg %n</pattern>-->
+            <pattern>[%red(%d{dd-MM-yyyy HH:mm:ss.SSS})][%highlight(%level)] %cyan(%logger{5}): %msg %n</pattern>
+        </encoder>
+    </appender>
+
+    <servlet>
+        <servlet-name>ViewStatusMessages</servlet-name>
+        <servlet-class>ch.qos.logback.classic.ViewStatusMessagesServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ViewStatusMessages</servlet-name>
+        <url-pattern>/lbClassicStatus</url-pattern>
+    </servlet-mapping>
+
+    <logger name="com.baku" level="ERROR"/>
+
+    <logger name="akka" level="INFO"/>
+    <logger name="org.apache.kafka" level="ERROR"/>
+    <logger name="org.apache" level="ERROR"/>
+    <logger name="akka.kafka" level="ERROR"/>
+    <logger name="kafka" level="DEBUG"/>
+    <logger name="com.baku." level="INFO"/>
+    <logger name="com.baku.kafkascala" level="INFO"/>
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>

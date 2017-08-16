@@ -1,2 +1,2 @@
 # kafkaScala
-Kafka scala using docker compose
+Running scala backend service with kafka in docker

@@ -6,18 +6,20 @@ import akka.Done
 import akka.kafka.scaladsl.Consumer
 import akka.kafka.{ConsumerSettings, Subscriptions}
 import akka.stream.scaladsl.Sink
+import com.typesafe.scalalogging.LazyLogging
 import org.apache.kafka.clients.consumer.{ConsumerConfig, ConsumerRecord}
 import org.apache.kafka.common.TopicPartition
 import org.apache.kafka.common.serialization.{ByteArrayDeserializer, StringDeserializer}
+
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
-class DB {
+class DB extends LazyLogging {
 
   private val offset = new AtomicLong
 
   def save(record: ConsumerRecord[Array[Byte], String]): Future[Done] = {
-    println(s"DB.save: ${record.value}")
+    logger.debug(s"DB.save: ${record.value}")
     offset.set(record.offset)
     Future.successful(Done)
   }
@@ -26,14 +28,14 @@ class DB {
     Future.successful(offset.get)
 
   def update(data: String): Future[Done] = {
-    println(s"DB.update: $data")
+    logger.debug(s"DB.update: $data")
     Future.successful(Done)
   }
 }
 
-class Rocket {
+class Rocket extends LazyLogging {
   def launch(destination: String): Future[Done] = {
-    println(s"Rocket launched to $destination")
+    logger.debug(s"Rocket launched to $destination")
     Future.successful(Done)
   }
 }

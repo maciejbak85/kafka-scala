@@ -1,14 +1,16 @@
 package com.baku.kafkascala
 
+import com.typesafe.scalalogging.LazyLogging
+
 import scala.util.{Failure, Success}
 import scala.concurrent.ExecutionContext.Implicits.global
 
-object Main extends App {
+object Main extends App with LazyLogging {
 
-  println("Running scala code...")
+  logger.debug("Running scala code...")
   MsgProducer.processMessages.andThen({
     case Success(_) =>
-      println("loading data")
+      logger.info("loading data")
       MsgConsumer.loadData
     case Failure(msg) => msg.printStackTrace()
   })
